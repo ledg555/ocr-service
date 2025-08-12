@@ -1,18 +1,23 @@
 import { Router } from "express";
+import scribe from "scribe.js-ocr";
 import { OCRController } from "./ocr.controller.js";
+import { OCRService } from "./ocr.service.js";
 
 const OCRRouter = Router();
+let ocrController;
 
-OCRRouter.get("/ocr", (req, res) => {
-  const path =
-    "https://drive.google.com/file/d/1xi3wEkRgY4yzILjKmg1w5tPiHG-QHN1d/view?usp=drive_link";
-  res.json({
-    message: "OCR service works!",
-    data: path,
-  });
+(async () => {
+  try {
+    await scribe.init({ pdf: true, ocr: true, font: true });
+    const ocrService = new OCRService(scribe);
+    ocrController = new OCRController(ocrService);
 
-  // const text = await this.ocrService.extractText(path);
-  // return { text };
-});
+    OCRRouter.post("/ocr", (req, res) => ocrController.extractText(req, res));
+
+    console.log("OCR router successfully initialized.");
+  } catch (error) {
+    console.error("Failed to initialize the OCR router:", error);
+  }
+})();
 
 export { OCRRouter };
