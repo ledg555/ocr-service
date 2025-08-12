@@ -1,18 +1,11 @@
 import { Router } from "express";
 import { OCRController } from "./ocr.controller.js";
+import { OCRService } from "./ocr.service.js";
 
 const OCRRouter = Router();
+const ocrService = new OCRService();
+const ocrController = new OCRController(ocrService);
 
-OCRRouter.get("/ocr", (req, res) => {
-  const path =
-    "https://drive.google.com/file/d/1xi3wEkRgY4yzILjKmg1w5tPiHG-QHN1d/view?usp=drive_link";
-  res.json({
-    message: "OCR service works!",
-    data: path,
-  });
-
-  // const text = await this.ocrService.extractText(path);
-  // return { text };
-});
+OCRRouter.post("/ocr", (req, res) => ocrController.extractText(req, res));
 
 export { OCRRouter };
