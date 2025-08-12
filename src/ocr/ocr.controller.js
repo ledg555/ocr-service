@@ -8,7 +8,7 @@ export class OCRController {
     const text = await this.#ocrService.extractText();
     res.json({
       message: "OCR service works!",
-      data: `text: ${text}`,
+      data: { text },
     });
   }
 }

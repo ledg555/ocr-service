@@ -1,11 +1,14 @@
 export class OCRService {
-  #ocrClient;
-  constructor() {
-    this.#ocrClient = null;
+  ocrClient;
+  constructor(ocrClient) {
+    this.ocrClient = ocrClient;
   }
+
   async extractText(
     path = "https://drive.google.com/file/d/1xi3wEkRgY4yzILjKmg1w5tPiHG-QHN1d/view?usp=drive_link"
   ) {
-    return path;
+    const text = await this.ocrClient.extractText([path]);
+    console.log("Extracted text:", text);
+    return text;
   }
 }
