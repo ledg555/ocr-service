@@ -2,7 +2,10 @@ import multer from "multer";
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
-const fileMiddleware = upload.fields([
+const fileMiddleware = upload.single("file");
+
+//! TODO: Checar si conviene fields o array
+const filesMiddleware = upload.fields([
   {
     name: "file",
     maxCount: 1,
@@ -12,4 +15,4 @@ const fileMiddleware = upload.fields([
   },
 ]);
 
-export { fileMiddleware };
+export { fileMiddleware, filesMiddleware };
