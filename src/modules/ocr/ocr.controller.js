@@ -4,8 +4,8 @@ export class OCRController {
     this.#ocrService = ocrService;
   }
 
-  async extractText(req, res) {
-    const text = await this.#ocrService.extractText();
+  async extractText(file) {
+    const text = await this.#ocrService.extractText([file]);
     res.json({
       message: "OCR service works!",
       data: { text },

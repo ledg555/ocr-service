@@ -1,6 +1,5 @@
 import express from "express";
-import multer from "multer";
-import { OCRRouter } from "./ocr/ocr.routes.js";
+import { OCRRouter } from "./modules/ocr/ocr.routes.js";
 
 const app = express();
 
