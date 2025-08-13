@@ -12,7 +12,7 @@ let ocrController;
     const ocrService = new OCRService(scribe);
     ocrController = new OCRController(ocrService);
 
-    OCRRouter.post("/ocr", (req, res) => ocrController.extractText(req, res));
+    OCRRouter.put("/", (req, res) => ocrController.extractText(req, res));
 
     console.log("OCR router successfully initialized.");
   } catch (error) {

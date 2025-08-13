@@ -1,4 +1,5 @@
 import express from "express";
+import multer from "multer";
 import { OCRRouter } from "./ocr/ocr.routes.js";
 
 const app = express();
@@ -11,7 +12,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use(OCRRouter);
+app.use("/ocr", OCRRouter);
 
 app.use((req, res) => {
   res.status(404).json({
