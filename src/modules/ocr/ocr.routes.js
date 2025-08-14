@@ -17,7 +17,7 @@ let ocrController;
       return ocrController.extractText(req, res);
     });
 
-    console.log("OCR router successfully initialized.");
+    console.log("OCR router initialized!");
   } catch (error) {
     console.error("Failed to initialize the OCR router:", error);
   }

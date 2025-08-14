@@ -9,7 +9,7 @@ export class OCRController {
   async extractText(req, res) {
     const { file: multerFile } = req;
     const text = await this.#ocrService.extractText(multerFile);
-    res.json({
+    return res.json({
       message: "OCR service works!",
       data: { text },
     });

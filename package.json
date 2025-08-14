@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@tesseract.js-data/spa": "^1.0.0",
     "express": "^5.1.0",
     "multer": "^2.0.2",
     "scribe.js-ocr": "^0.8.0"
