@@ -14,9 +14,7 @@ let ocrController;
     ocrController = new OCRController(ocrService);
 
     OCRRouter.put("/", fileMiddleware, (req, res) => {
-      const { file } = req;
-      console.log({ file });
-      return ocrController.extractText(file);
+      return ocrController.extractText(req, res);
     });
 
     console.log("OCR router successfully initialized.");
