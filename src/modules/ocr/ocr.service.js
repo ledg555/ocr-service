@@ -1,13 +1,21 @@
 export class OCRService {
-  ocrClient;
+  #ocrClient;
   constructor(ocrClient) {
-    this.ocrClient = ocrClient;
+    this.#ocrClient = ocrClient;
   }
 
-  async extractText(
-    file = "https://drive.google.com/file/d/1xi3wEkRgY4yzILjKmg1w5tPiHG-QHN1d/view?usp=drive_link"
-  ) {
-    const text = await this.ocrClient.extractText([file.buffer]);
+  async extractText(multerFile) {
+    const buffer = multerFile.buffer;
+    const blob = new Blob([buffer], { type: multerFile.mimetype });
+    const file = new File([blob], multerFile.originalname, {
+      type: multerFile.mimetype,
+    });
+    const fileWithFileData = { ...file, fileData: buffer };
+
+    const text = await this.#ocrClient.extractText(
+      [fileWithFileData],
+      ["es", "esp", "sp", "spa", "spanish"]
+    );
     console.log("Extracted text:", text);
     return text;
   }
