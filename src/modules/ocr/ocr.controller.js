@@ -1,5 +1,3 @@
-import multer from "multer";
-
 export class OCRController {
   #ocrService;
   constructor(ocrService) {
@@ -10,7 +8,7 @@ export class OCRController {
     const { file: multerFile } = req;
     const text = await this.#ocrService.extractText(multerFile);
     return res.json({
-      message: "OCR service works!",
+      message: "Text extracted successfully!",
       data: { text },
     });
   }
